@@ -16,8 +16,8 @@ class MarkovTextController < ApplicationController
 		p markov.parse_string params[:keywords]
 		p markov.parse_string params[:dictionary]
 		res = []
-		res << markov.generate_7_sentences 
-		res << markov.generate_20_words
+		res << "фраза: #{markov.generate_1_sentence}"
+		res << " 10 слов: #{markov.generate_10_words}"
 	end
 
 end

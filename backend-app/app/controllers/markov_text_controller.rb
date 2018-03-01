@@ -8,16 +8,14 @@ class MarkovTextController < ApplicationController
 	def generate
 		p params[:keywords]
 		p params[:dictionary]
-		render html: "<blockquote>#{creative.to_s}</blockquote>".html_safe
+		render html: "<blockquote>#{creative}</blockquote>".html_safe
 	end
 
 	def creative
 		markov = MarkyMarkov::TemporaryDictionary.new
 		p markov.parse_string params[:keywords]
 		p markov.parse_string params[:dictionary]
-		res = []
-		res << "фраза: #{markov.generate_1_sentence}"
-		res << " 10 слов: #{markov.generate_10_words}"
+		"<p>фраза: #{markov.generate_1_sentence}</p><p>10 слов: #{markov.generate_10_words}</p>".html_safe
 	end
 
 end

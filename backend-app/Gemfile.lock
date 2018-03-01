@@ -53,10 +53,13 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
+    marky_markov (0.3.5)
+      msgpack
     method_source (0.9.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    msgpack (1.2.2)
     nio4r (2.2.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -109,6 +112,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  marky_markov
   puma (~> 3.7)
   rails (~> 5.1.5)
   sqlite3

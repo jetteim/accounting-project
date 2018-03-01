@@ -15,7 +15,7 @@ class MarkovTextController < ApplicationController
 		markov = MarkyMarkov::TemporaryDictionary.new
 		p markov.parse_string params[:keywords]
 		p markov.parse_string params[:dictionary]
-		"<p>фраза: #{markov.generate_1_sentence}</p><p>10 слов: #{markov.generate_10_words}</p>".html_safe
+		"<h2>три фразы: </h2><p>#{markov.generate_3_sentences}</p><h2>20 слов: </h2><p>#{markov.generate_20_words}</p>".html_safe
 	end
 
 end

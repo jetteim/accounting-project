@@ -1,6 +1,6 @@
 class MarkovTextController < ApplicationController
 	def show
-		render html: "<body></body>"
+		render html: "<h1>Генератор текста по цепям Маркова</h1>"
 	end
 
 	def generate

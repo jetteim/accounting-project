@@ -8,7 +8,7 @@ class MarkovTextController < ApplicationController
 	def generate
 		p params[:keywords]
 		p params[:dictionary]
-		render html: "<blockquote>#{creative}</blockquote>".html_safe
+		render html: "<blockquote>#{creative.to_s}</blockquote>".html_safe
 	end
 
 	def creative

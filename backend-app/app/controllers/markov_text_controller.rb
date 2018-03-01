@@ -5,11 +5,11 @@ FORM = "<h1>Генератор текста по цепям Маркова</h1> 
 	<label for="dictionary" >Побольше текста/label><br> \
 	<input type="textarea" name="dictionary" id="dictionary"/><br> \
 	<input type="submit" value="Submit"> \
-</form>".html_safe
+</form>"
 
 class MarkovTextController < ApplicationController
 	def show
-		render html: FORM
+		render html: FORM.html_safe
 	end
 
 	def generate

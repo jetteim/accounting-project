@@ -1,0 +1,2 @@
+class MarkovTextController < ApplicationController
+end

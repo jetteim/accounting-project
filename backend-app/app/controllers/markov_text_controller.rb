@@ -25,9 +25,9 @@ class MarkovTextController < ApplicationController
 		form = []
 		form << '<h1>Генератор текста по цепям Маркова</h1><form method="POST">'
 		form << '<label for="sentences">сгенерировать N фраз</label><br>'
-		form << '<input name="sentences" type="number" id="sentences"></input><br>'
+		form << '<input name="sentences" type="number" id="sentences"' + " value=\"#{params[:sentences]}\"" + '></input><br>'
 		form << '<label for="words">сгенерировать фразу из N слов</label><br>'
-		form << '<input name="words" type="number" id="words"></input><br>'
+		form << '<input name="words" type="number" id="words"' + " value=\"#{params[:words]}\"" + '></input><br>'
 		form << '<label for="dictionary" >Побольше текста</label><br>'
 		form << '<textarea rows="8" cols="80" type="textarea" name="dictionary" id="dictionary"></textarea> <br>'
 		form << '<input type="submit" value="Submit"></form>'

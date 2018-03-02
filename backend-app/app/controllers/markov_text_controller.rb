@@ -1,21 +1,35 @@
-FORM = '<h1>Генератор текста по цепям Маркова</h1> <form method="POST"> <label for="keywords" >Ключевые слова или слоган</label> <input type="text" name="keywords" id="keywords"><br> <label for="dictionary" >Побольше текста</label><br> <textarea rows="8" cols="80" type="textarea" name="dictionary" id="dictionary"></textarea> <br> <input type="submit" value="Submit"></form>'
 
 class MarkovTextController < ApplicationController
+	before_action :build_form
+
 	def show
-		render html: FORM.html_safe
+		render html: @form.html_safe
 	end
 
 	def generate
-		p params[:keywords]
-		p params[:dictionary]
-		render html: "<blockquote>#{creative}</blockquote>".html_safe
+		render html: "#{@form}<blockquote>#{creative}</blockquote>".html_safe
 	end
 
 	def creative
-		markov = MarkyMarkov::TemporaryDictionary.new
-		p markov.parse_string params[:keywords]
+		markov = MarkyMarkov::Dictionary.new('dictionary')
 		p markov.parse_string params[:dictionary]
-		"<h2>три фразы: </h2><p>#{markov.generate_3_sentences}</p><h2>20 слов: </h2><p>#{markov.generate_20_words}</p>".html_safe
+		res = []
+		res << "<h2>#{params[:sentences]} фразы: </h2><p>#{markov.generate_n_sentences params[:sentences]}</p>"
+		res << "<h2>фраза из #{params[:words]} слов: </h2><p>#{markov.generate_n_words params[:words]}</p>"
+		res.join.html_safe
+	end
+
+	def build_form
+		form = []
+		form << '<h1>Генератор текста по цепям Маркова</h1><form method="POST">'
+		form << '<label for="sentences">сгенерировать N фраз</label><br>'
+		form << '<input name="sentences" type="number" id="sentences">сгенерировать N фраз</label><br>'
+		form << '<label for="words">сгенерировать фразу из N слов</label><br>'
+		form << '<input name="words" type="number" id="words">сгенерировать N фраз</label><br>'
+		form << '<label for="dictionary" >Побольше текста</label><br>'
+		form << '<textarea rows="8" cols="80" type="textarea" name="dictionary" id="dictionary"></textarea> <br>'
+		form << '<form method="POST">   <input type="submit" value="Submit"></form>'
+		@form = form.join
 	end
 
 end

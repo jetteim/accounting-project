@@ -12,7 +12,9 @@ class MarkovTextController < ApplicationController
 
 	def creative
 		markov = MarkyMarkov::Dictionary.new('dictionary')
-		p markov.parse_string(params[:dictionary]).join
+		p markov.parse_string params[:dictionary]
+		markov.save_dictionary!
+
 		res = []
 		res << "<h2>#{params[:sentences]} фразы:</h2><p>#{markov.generate_n_sentences params[:sentences].to_i}</p>"
 		res << "<h2>фраза из #{params[:words]} слов:</h2><p>#{markov.generate_n_words params[:words].to_i}</p>"

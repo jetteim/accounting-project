@@ -30,7 +30,7 @@ class ImagesDetectorController < ApplicationController
 	session = Tensorflow::Session.new(graph, session_op)
 	out_tensor = session.run({}, [output], [])
 	graph = Tensorflow::Graph.new
-	graph.read_file(Rails.root.join('public', 'tmp', '/tensorflow_inception_graph.pb'))
+	graph.read_file(Rails.root.join('lib', '/tensorflow_inception_graph.pb'))
 	tensor = Tensorflow::Tensor.new(out_tensor[0], :float)
 	sess = Tensorflow::Session.new(graph)
 	hash = {}
@@ -39,7 +39,7 @@ class ImagesDetectorController < ApplicationController
 	predictions.flatten!
 	labels = {}
 	j = 0
-	File.foreach('imagenet_comp_graph_label_strings.txt') do |line|
+	File.foreach(Rails.root.join('lib', 'imagenet_comp_graph_label_strings.txt')) do |line|
 	    labels[line] = predictions[j]
 	    j += 1
 	end

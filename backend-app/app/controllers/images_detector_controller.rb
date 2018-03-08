@@ -53,7 +53,7 @@ end
 		form = []
 		form << '<h1>Анализ картинки</h1><form method="POST" enctype="application/x-www-form-urlencoded">'
 		form << '<label for="file">Картинка</label><br>'
-		form << '<input name="file" type="number" id="file"' + " value=\"#{params[:sentences]}\"" + '></input><br>'
+		form << '<input name="file" type="file" id="file"' + " value=\"#{params[:sentences]}\"" + '></input><br>'
 		form << '<input type="submit" value="Submit"></form>'
 		@form = form.join
 	end

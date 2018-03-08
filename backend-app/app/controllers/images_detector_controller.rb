@@ -14,7 +14,7 @@ class ImagesDetectorController < ApplicationController
   end
 
   def classify (image = @submitted)
-	File.open(fname = Rails.root.join('public', 'tmp', SecureRandom.hex(10)), 'wb') do {|file|file.write(image)}
+	File.open(fname = Rails.root.join('public', 'tmp', SecureRandom.hex(10)), 'wb') { |file| file.write(image) }
 
 	scope_class = Tensorflow::Scope.new
   	input = Const(scope_class, fname)
@@ -30,6 +30,7 @@ class ImagesDetectorController < ApplicationController
 	session = Tensorflow::Session.new(graph, session_op)
 	out_tensor = session.run({}, [output], [])
 	graph = Tensorflow::Graph.new
+	# тут надо подгружать модель, которую мы натренируем
 	graph.read_file(Rails.root.join('lib', '/tensorflow_inception_graph.pb'))
 	tensor = Tensorflow::Tensor.new(out_tensor[0], :float)
 	sess = Tensorflow::Session.new(graph)

@@ -8,17 +8,14 @@ class ImagesDetectorController < ApplicationController
   end
 
   def submit
-  	p params
-  	p uploaded_io = params[:file]
-  	p @submitted = uploaded_io.read
-  	render html: "#{@form}<blockquote>#{classify(@submitted)}</blockquote>".html_safe
+	File.open(fname = Rails.root.join('tmp', "#{SecureRandom.hex(10)}.jpg"), 'wb') { |file| file.write(params[:file].read) }
+  	render html: "#{@form}<blockquote>#{classify(fname)}</blockquote>".html_safe
   end
 
-  def classify (image = @submitted)
-	File.open(fname = Rails.root.join('tmp', "#{SecureRandom.hex(10)}.jpg"), 'wb') { |file| file.write(image) }
+  def classify (filename)
 
 	scope_class = Tensorflow::Scope.new
-  	input = Const(scope_class, fname)
+  	input = Const(scope_class, filename)
 	output = input.operation.g.AddOperation(Tensorflow::OpSpec.new('ReadFile', 'ReadFile', nil, [input]))
 	output = input.operation.g.AddOperation(Tensorflow::OpSpec.new('DecodeJpeg', 'DecodeJpeg', Hash['channels' => 3], [output.output(0)]))
 	output = input.operation.g.AddOperation(Tensorflow::OpSpec.new('Cast', 'Cast', Hash['DstT' => 1], [output.output(0)]))

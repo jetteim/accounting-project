@@ -15,7 +15,7 @@ class ImagesDetectorController < ApplicationController
   end
 
   def classify (image = @submitted)
-	File.open(fname = Rails.root.join('public', 'tmp', SecureRandom.hex(10)), 'wb') { |file| file.write(image) }
+	File.open(fname = Rails.root.join('tmp', SecureRandom.hex(10)), 'wb') { |file| file.write(image) }
 
 	scope_class = Tensorflow::Scope.new
   	input = Const(scope_class, fname)

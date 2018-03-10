@@ -29,7 +29,7 @@ class ImagesDetectorController < ApplicationController
 	out_tensor = session.run({}, [output], [])
 	graph = Tensorflow::Graph.new
 	# тут надо подгружать модель, которую мы натренируем
-	graph.read_file(Rails.root.join('lib', '/tensorflow_inception_graph.pb'))
+	graph.read_file(Rails.root.join('lib', 'tensorflow_inception_graph.pb'))
 	tensor = Tensorflow::Tensor.new(out_tensor[0], :float)
 	sess = Tensorflow::Session.new(graph)
 	hash = {}

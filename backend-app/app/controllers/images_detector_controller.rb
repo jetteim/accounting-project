@@ -8,6 +8,7 @@ class ImagesDetectorController < ApplicationController
   end
 
   def submit
+  	p params
   	p uploaded_io = params[:file]
   	p @submitted = uploaded_io.read
   	render html: "#{@form}<blockquote>#{classify(@submitted)}</blockquote>".html_safe
@@ -51,7 +52,7 @@ end
 
 	def build_form
 		form = []
-		form << '<h1>Анализ картинки</h1><form method="POST" enctype="application/x-www-form-urlencoded">'
+		form << '<h1>Анализ картинки</h1><form method="POST" enctype="multipart/form-data">'
 		form << '<label for="file">Картинка</label><br>'
 		form << '<input name="file" type="file" id="file"' + " value=\"#{params[:sentences]}\"" + '></input><br>'
 		form << '<input type="submit" value="Submit"></form>'

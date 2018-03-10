@@ -15,7 +15,7 @@ class ImagesDetectorController < ApplicationController
   def classify (filename)
   	raise ArgumentError, "Cannot find image file: #{filename}" unless File.file?(filename)
 	scope_class = Tensorflow::Scope.new
-  	input = Const(scope_class, filename)
+  	input = Const(scope_class, filename.to_s)
 	output = input.operation.g.AddOperation(Tensorflow::OpSpec.new('ReadFile', 'ReadFile', nil, [input]))
 	output = input.operation.g.AddOperation(Tensorflow::OpSpec.new('DecodeJpeg', 'DecodeJpeg', Hash['channels' => 3], [output.output(0)]))
 	output = input.operation.g.AddOperation(Tensorflow::OpSpec.new('Cast', 'Cast', Hash['DstT' => 1], [output.output(0)]))

@@ -1,5 +1,6 @@
 require 'tensorflow'
 
+# curl -F file=@07200a28c02cc269e160.jpg http://jetteim.me/images
 class ImagesDetectorController < ApplicationController
   before_action :build_form
 
@@ -43,6 +44,7 @@ class ImagesDetectorController < ApplicationController
 	    j += 1
 	end
 	result = Hash[labels.sort { |a, b| b[1].to_f <=> a[1].to_f }]
+	result = result[0..params[:results]] if params[:results]
   end
 
 

@@ -43,9 +43,9 @@ class ImagesDetectorController < ApplicationController
 	    labels[line.squish] = predictions[j]
 	    j += 1
 	end
-	result = Hash[labels.sort { |a, b| b[1].to_f <=> a[1].to_f }]
-	lines = params[:lines].to_i if params[:lines]
-	return lines ? result : result[0..lines]
+	result = labels.sort { |a, b| b[1].to_f <=> a[1].to_f }
+	lines = params[:lines] if params[:lines]
+	lines ? Hash[result[0..lines.to_i]] : Hash[result]
   end
 
 

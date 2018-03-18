@@ -9,7 +9,7 @@ class ImagesDetectorController < ApplicationController
 
   def submit
 	File.open(fname = Rails.root.join('tmp', "#{SecureRandom.hex(10)}.jpg"), 'wb') { |file| file.write(params[:file].read) }
-  	render json: classify(fname).to_json
+  	render json: classify(fname).as_json
   end
 
   def classify (filename)

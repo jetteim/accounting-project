@@ -39,7 +39,7 @@ class ImagesDetectorController < ApplicationController
 	labels = {}
 	j = 0
 	File.foreach(Rails.root.join('lib', 'imagenet_comp_graph_label_strings.txt')) do |line|
-	    labels[line.squish] = predictions[j][1]
+	    labels[line.squish] = predictions[j]
 	    j += 1
 	end
 	result = Hash[labels.sort { |a, b| b[1].to_f <=> a[1].to_f }]

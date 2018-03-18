@@ -35,7 +35,7 @@ class ImagesDetectorController < ApplicationController
 	hash = {}
 	hash[graph.operation('input').output(0)] = tensor
 	predictions = sess.run(hash, [graph.operation('output').output(0)], [])
-	# predictions.flatten!
+	predictions.flatten!
 	labels = {}
 	j = 0
 	File.foreach(Rails.root.join('lib', 'imagenet_comp_graph_label_strings.txt')) do |line|
@@ -43,6 +43,7 @@ class ImagesDetectorController < ApplicationController
 	    j += 1
 	end
 	result = labels.sort { |a, b| b[1].to_f <=> a[1].to_f }
+
   end
 
 

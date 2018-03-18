@@ -9,7 +9,7 @@ class ImagesDetectorController < ApplicationController
 
   def submit
 	File.open(fname = Rails.root.join('tmp', "#{SecureRandom.hex(10)}.jpg"), 'wb') { |file| file.write(params[:file].read) }
-  	render html: "#{@form}<blockquote>#{classify(fname)}</blockquote>".html_safe
+  	render json: classify(fname).to_json
   end
 
   def classify (filename)
@@ -43,7 +43,6 @@ class ImagesDetectorController < ApplicationController
 	    j += 1
 	end
 	result = labels.sort { |a, b| b[1].to_f <=> a[1].to_f }
-	result.join '<br>'
 end
 
 

@@ -44,7 +44,7 @@ class ImagesDetectorController < ApplicationController
 	    j += 1
 	end
 	result = Hash[labels.sort { |a, b| b[1].to_f <=> a[1].to_f }]
-	return params[:results] ? result : result[0..params[:results]]
+	return params[:lines] ? result : result[0..params[:lines]]
   end
 
 
